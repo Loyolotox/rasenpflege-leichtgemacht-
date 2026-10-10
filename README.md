@@ -148,3 +148,6 @@ Rasen braucht vor allem drei wichtige Nährstoffe:
 ## 🎯 Ziel des Projekts
 
 Unser Ziel ist ein **modular erweiterbares und intelligentes System zur Rasenpflege**, das Sensorik, Kamera, Datenauswertung und automatisierte Pflege verbindet. Dadurch soll der Pflegeaufwand sinken und Wasser sowie Dünger sollen möglichst effizient eingesetzt werden.
+
+<img width="2397" height="2112" alt="grafik" src="https://github.com/user-attachments/assets/4c539276-b0d2-4964-bcd7-0d185c8e2141" />
+
