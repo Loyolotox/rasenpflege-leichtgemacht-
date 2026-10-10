@@ -83,14 +83,3 @@ Rasen braucht vor allem drei Nährstoffe:
 
 ---
 
-## 💻 Code-Ausschnitte
-
-### ESP32: AS7263 Sensor-Auslesung
-```python
-from machine import Pin, I2C
-import time
-
-i2c = I2C(-1, scl=Pin(5), sda=Pin(4), freq=100000)
-SENSOR = 0x49
-
-# (Hier den restlichen Code von dir einfügen...)
