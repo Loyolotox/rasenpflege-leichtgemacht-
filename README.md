@@ -70,6 +70,75 @@ Unser System geht deutlich über die ursprüngliche Idee hinaus. Der Mähroboter
 - **Spätere KI-Auswertung:** Bild- und Sensordaten sollen kombiniert werden, um den Zustand des Rasens genauer einzuschätzen.
 
 ---
+## 🔌 Stückliste (BOM) und Kostenübersicht
+
+Die folgende Stückliste dokumentiert die Hardware unseres Projekts **„Rasenpflege leicht gemacht!“**. Die meisten Komponenten wurden bereits angeschafft. Allerdings sind noch nicht alle programmiert, kalibriert, getestet oder vollständig in das Gesamtsystem integriert.
+
+Wir entwickeln das System schrittweise: Zuerst testen wir die einzelnen Sensoren und Steuerungen. Anschließend verbinden wir diese mit dem ESP32 und dem Raspberry Pi. Darauf aufbauend sollen die Kameraauswertung, die zentrale Datensammlung und später die gezielte Bewässerung umgesetzt werden.
+
+### 📦 Hardware und Komponenten
+
+| Komponente | Menge | Verwendung im Projekt | Bezugsquelle | Entwicklungsstand |
+|---|---:|---|---|---|
+| ESP32-S3-CAM | 1 | Kamera, Sensorsteuerung und spätere Bildaufnahme | Noch nicht dokumentiert | Vorhanden; Kamera und Software weiter zu testen |
+| Raspberry Pi 3 Model B+ | 1 | Datensammlung, Server und Web-App | Bereits vorhanden | In Verwendung; weitere Integration geplant |
+| Pumpe | 1 | Pumpenansteuerung und Funktionstests | Noch nicht dokumentiert | Vorhanden; Ansteuerung bereits getestet |
+| Wasserstandssensor (Fund uino) | 1 | Messung des Wasserstands im Tank | Noch nicht dokumentiert | Vorhanden; Messwerte bereits ausgelesen |
+| Bodenfeuchtesensor | 1 | Messung der Bodenfeuchtigkeit und Referenzwerte | [Reichelt – Bodenfeuchtesensor](https://www.reichelt.de/de/de/shop/produkt/arduino_-_feuchtesensor_fuer_bodenfeuchte-282511) | Vorhanden; Kalibrierung und weitere Tests erforderlich |
+| AS7263 NIR-Sensor | 1 | Optische Spektralmessungen zur Untersuchung der Rasenfeuchtigkeit | [Antratek – AS7263 NIR](https://www.antratek.de/spectral-sensor-breakout-as7263-nir) | Angeschafft; Kalibrierung und Auswertung erforderlich |
+| Gardena smart SILENO max, 800 m² | 1 | Mobile Plattform für das Rasenpflegekonzept | [Gardena – SILENO max](https://www.gardena.com/de/produkte/rasenpflege/maehroboter/maehroboter-smart-sileno-max-800-m/970620803.html) | Vorhanden; Integration in das Gesamtkonzept zu prüfen |
+| Zusätzliche ESP32-S3-Boards | 2 | Weitere Steuerungs- und Sensorversuche | Noch nicht dokumentiert | Vorhanden; weitere Programmierung und Tests |
+| BME280-Sensormodule | 2 | Messung von Temperatur, Luftdruck und Luftfeuchtigkeit | [Roboter-Bausatz – BME280](https://www.roboter-bausatz.de/p/digital-bme280-temperatur-sensor-luftdruck-feuchtigkeit-i2c-5v-barometer-arduino) | Menge angegeben; genaue Module und Integration zu prüfen |
+| Raspberry Pi Zero W | 1 | Mögliche kompaktere Plattform für die externe Station | [Raspberry Pi Zero W](https://www.raspberrypi.com/products/raspberry-pi-zero-w/) | Vorhanden; Einsatz als Alternative wird geprüft |
+| VL53L0X-ToF-Entfernungssensoren | 2 | Entfernungsmessung mittels Time-of-Flight | [Bisheriger Informationslink](https://www.testberichte.de/pdb/Fg1AbVrGSwKm792R-xWDog.html) | Vorhanden; genaue Module und Integration zu prüfen |
+| Externer Wassersprinkler | 1 | Spätere bedarfsgerechte Bewässerung | Noch nicht dokumentiert | Geplante Funktion; Beschaffungsstand noch zu bestätigen |
+| ZED-F9P-15B-GPS-Modul | Noch offen | Positionsbestimmung für eine spätere Feuchtigkeitskarte | [DigiKey – ZED-F9P-15B](https://www.digikey.de/de/products/detail/u-blox/ZED-F9P-15B/20838269) | Mögliche Erweiterung; Anschaffungsstand noch offen |
+| Raspberry-Pi-Micro-USB-Kabel | Noch offen | Stromversorgung bzw. Verbindung des Raspberry Pi | [Reichelt – Micro-USB-Kabel](https://www.reichelt.de/de/de/shop/produkt/raspberry_pi_-_kabel_micro-usb_m_auf_usb_typ_a_f_otg_10cm_-316284) | In den Projektunterlagen aufgeführt; Bestand und Menge noch zu prüfen |
+
+**Hinweise zur Hardwareauswahl:**
+
+- Der verlinkte Sensor ist ein **BME280**, kein BMP280. Der BME280 misst zusätzlich die Luftfeuchtigkeit. Ob die tatsächlich vorhandenen Module genau diesem Modell entsprechen, muss gegebenenfalls geprüft werden.
+- Beim Raspberry Pi Zero W muss die genaue Hardwareversion noch mit dem vorhandenen Gerät abgeglichen werden.
+- Der bisherige Link zum VL53L0X führt zu einer Informationsseite und ist noch keine bestätigte Bezugsquelle für das konkrete Modul.
+- Die angegebenen Mengen beziehen sich auf den aktuellen Projektstand. Bei noch nicht bestätigten Angaben bleiben Menge oder Modell offen.
+
+### 🧪 Entwicklungsstatus
+
+Für die Dokumentation unterscheiden wir zwischen dem Besitz einer Komponente und ihrer technischen Integration.
+
+| Status | Bedeutung |
+|---|---|
+| **Vorhanden** | Die Komponente wurde bereits angeschafft. |
+| **In Entwicklung** | Programmierung, Kalibrierung oder Funktionstests laufen noch. |
+| **In Verwendung** | Die Komponente funktioniert bereits in einem Teil des Prototyps. |
+| **Geplant** | Die Komponente oder Funktion ist für eine spätere Entwicklungsphase vorgesehen. |
+
+Bereits erfolgreich umgesetzt wurden unter anderem die Pumpenansteuerung, das Auslesen des Wasserstandssensors sowie die WLAN-Kommunikation zwischen ESP32 und Raspberry Pi. Andere Komponenten müssen noch einzeln getestet und anschließend in das Gesamtsystem eingebunden werden.
+
+### 💶 Kostenübersicht
+
+Die Gesamtkosten sollen anhand der tatsächlichen Anschaffungspreise berechnet werden. Da noch nicht alle Kaufpreise dokumentiert sind, wird vorerst keine Gesamtsumme angegeben.
+
+| Kostenposition | Berechnung | Betrag |
+|---|---|---:|
+| Bereits angeschaffte Hardware | Summe der tatsächlichen Kaufpreise | Noch zu ermitteln |
+| Zusätzliche ESP32-S3-Boards | 2 × tatsächlicher Kaufpreis | Noch zu ermitteln |
+| BME280-Sensormodule | 2 × tatsächlicher Kaufpreis | Noch zu ermitteln |
+| VL53L0X-ToF-Sensoren | 2 × tatsächlicher Kaufpreis | Noch zu ermitteln |
+| Raspberry Pi Zero W | Tatsächlicher Kaufpreis, sofern bekannt | Noch zu ermitteln |
+| Externer Wassersprinkler | Falls noch anzuschaffen | Noch offen |
+| GPS-Modul | Nur falls tatsächlich angeschafft oder bestellt | Noch offen |
+| Kabel und weitere Bauteile | Tatsächliche Mengen und Kaufpreise | Noch zu ermitteln |
+| **Gesamtkosten des Projekts** | **Summe der bestätigten Anschaffungskosten** | **Noch zu ermitteln** |
+
+Die Kostenübersicht wird ergänzt, sobald die tatsächlichen Kaufpreise bekannt sind. Bereits vorhandene Komponenten werden dabei nicht automatisch als kostenlose Teile gewertet: Auch ihre ursprünglichen Anschaffungskosten gehören zu den Projektkosten. Geplante, noch nicht gekaufte Erweiterungen werden separat aufgeführt.
+
+### 🎯 Ziel der Stückliste
+
+Die Stückliste schafft eine nachvollziehbare Übersicht über die verwendete Hardware, den Entwicklungsstand und die Kosten unseres Projekts. Sie wird während der Entwicklung aktualisiert, damit klar erkennbar bleibt, welche Komponenten bereits getestet wurden und welche Schritte noch ausstehen.
+
+
+---
 
 ## 🌟 Hintergrund: Biologie des Düngens
 
