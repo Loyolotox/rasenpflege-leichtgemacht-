@@ -128,6 +128,21 @@ Die Gesamtkosten sollen anhand der tatsächlichen Anschaffungspreise berechnet w
 | **Gesamtkosten des Projekts** | **Summe der bestätigten Anschaffungskosten** | **Noch zu ermitteln** |
 
 Die Kostenübersicht wird ergänzt, sobald die tatsächlichen Kaufpreise bekannt sind. Bereits vorhandene Komponenten werden dabei nicht automatisch als kostenlose Teile gewertet: Auch ihre ursprünglichen Anschaffungskosten gehören zu den Projektkosten. Geplante, noch nicht gekaufte Erweiterungen werden separat aufgeführt.
+---
+## 🔌 Verkabelung & Anschlüsse (Pinout)
+
+Da das System modular aufgebaut ist und auf Steckbörtern / per Jumper-Kabeln getestet wird, ist hier die Übersicht der wichtigsten Verbindungen:
+
+* **ESP32-S3-CAM & Raspberry Pi:**
+  * Verbindung erfolgt über USB (serielle Schnittstelle, erkannt unter `/dev/ttyACM0` am Raspberry Pi).
+  * Datenübertragung / Serverkommunikation über WLAN (ESP32 sendet Sensordaten an den Flask-Server auf dem Raspberry Pi).
+
+* **Wasserpumpe:**
+  * Angesteuert über einen digitalen Ausgang des ESP32 (geschaltet via Transrelay/Relais-Modul).
+  * Spannungsversorgung: 12V externe Stromquelle für die Pumpen, gesteuert über 3.3V/5V Logikpegel.
+
+* **Sensoren (Wasserstand, Bodenfeuchte, NIR):**
+  * Analog- und I2C-Anschlüsse (SDA/SCL) an den entsprechenden GPIOs des ESP32-S3.
 
 ### 🎯 Ziel der Stückliste
 
