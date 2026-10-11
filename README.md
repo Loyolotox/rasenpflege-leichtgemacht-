@@ -10,7 +10,7 @@ Dadurch soll weniger manueller Aufwand entstehen. Der Roboter soll mithilfe vers
 
 ## 📋 Projekt-Plan & Aufgaben
 
-https://chatgpt.com/s/m_6acbbfd2107081918fb0ca05fdcd8d7b
+<img width="1447" height="1087" alt="Intelligentes Rasenpflegesystem – Übersicht" src="https://github.com/user-attachments/assets/1184a4f6-4810-4271-8ab1-f6150bfe28aa" />
 
 ### 💡 Was der Rasenmäher machen muss
 
