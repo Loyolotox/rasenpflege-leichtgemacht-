@@ -80,21 +80,22 @@ Wir entwickeln das System schrittweise: Zuerst testen wir die einzelnen Sensoren
 
 ### 📦 Hardware und Komponenten
 
-Bauteil,Anzahl,Verwendungszweck,Produktlink,Status
-ESP32-S3-CAM,1,Kamera und Verarbeitung von Bilddaten,https://store.freenove.com/products/fnk0086,Vorhanden; Kamera und Software werden getestet
-Raspberry Pi 3 B+,1,Zentrale Datenerfassung und Server,https://pip.raspberrypi.com/categories/532,In Verwendung; Systemintegration läuft
-Wasserpumpen,2,Steuerung der Wasserzufuhr,https://www.amazon.de/s?k=12V+Wasserpumpe+Arduino,Vorhanden; Steuerung getestet
-Funduino-Wasserstandssensoren,3,Messung des Wasserstands im Tank,https://funduino.com/collections/fuellstandssensoren,Vorhanden; Messwerte getestet
-Bodenfeuchtesensoren,2,Messung der Bodenfeuchtigkeit,https://www.reichelt.de/de/de/shop/produkt/arduino_-_feuchtesensor_fuer_bodenfeuchte-282511,Vorhanden; Kalibrierung und Tests laufen
-AS7263-NIR-Sensor,1,Optische Messungen im nahinfraroten Bereich,https://www.antratek.de/spectral-sensor-breakout-as7263-nir,Vorhanden; Kalibrierung und Auswertung laufen
-GARDENA smart SILENO max 800 m²,1,Mobile Plattform für das Rasenpflegekonzept,https://www.gardena.com/de/produkte/rasenpflege/maehroboter/maehroboter-smart-sileno-max-800-m/970620803.html,Vorhanden; Integration muss getestet werden
-Weitere ESP32-S3-Boards,2,Zusätzliche Steuerungs- und Sensorversuche,https://www.antratek.de/thing-plus-esp32-s3,Vorhanden; weitere Tests geplant
-BME280-Sensormodule,2,"Messung von Temperatur, Luftdruck und Luftfeuchtigkeit",https://www.roboter-bausatz.de/p/digital-bme280-temperatur-sensor-luftdruck-feuchtigkeit-i2c-5v-barometer-arduino,Vorhanden; Einsatz je nach Teilprojekt
-Raspberry Pi Zero W,2,Kompakte Recheneinheiten für mögliche Erweiterungen,https://www.raspberrypi.com/products/raspberry-pi-zero-w/,Vorhanden; Einsatz für Erweiterungen offen
-VL53L0X-Abstandssensoren,2,Entfernungsmessungen,https://www.st.com/en/imaging-and-photonics-solutions/vl53l0x,Vorhanden
-Rasensprinkler,1,Gezielte Bewässerung ausgewählter Rasenbereiche,,Geplant; Produkt noch nicht bestätigt
-ZED-F9P-15B-GPS-Modul,Noch offen,Mögliche zukünftige Erweiterung zur Positionsbestimmung,https://www.digikey.de/de/products/detail/u-blox/ZED-F9P-15B/20838269,Zukünftige Erweiterung; Anschaffung nicht bestätigt
-Micro-USB-Kabel für Raspberry Pi,1,Stromversorgung oder Verbindung,https://www.reichelt.de/de/de/shop/produkt/raspberry_pi_-_kabel_micro-usb_m_auf_usb_typ_a_f_otg_10cm_-316284,Verfügbarkeit prüfen
+| Bauteil | Anzahl | Verwendungszweck | Produktlink | Status |
+| :--- | :---: | :--- | :--- | :--- |
+| **ESP32-S3-CAM** | 1 | Kamera und Verarbeitung von Bilddaten | [Zum Shop](https://store.freenove.com/products/fnk0086) | Vorhanden; Kamera und Software werden getestet |
+| **Raspberry Pi 3 B+** | 1 | Zentrale Datenerfassung und Server | [Zum Shop](https://pip.raspberrypi.com/categories/532) | In Verwendung; Systemintegration läuft |
+| **Wasserpumpen** | 2 | Steuerung der Wasserzufuhr | [Zum Shop](https://www.amazon.de/s?k=12V+Wasserpumpe+Arduino) | Vorhanden; Steuerung getestet |
+| **Funduino-Wasserstandssensoren** | 3 | Messung des Wasserstands im Tank | [Zum Shop](https://funduino.com/collections/fuellstandssensoren) | Vorhanden; Messwerte getestet |
+| **Bodenfeuchtesensoren** | 2 | Messung der Bodenfeuchtigkeit | [Zum Shop](https://www.reichelt.de/de/de/shop/produkt/arduino_-_feuchtesensor_fuer_bodenfeuchte-282511) | Vorhanden; Kalibrierung und Tests laufen |
+| **AS7263-NIR-Sensor** | 1 | Optische Messungen im nahinfraroten Bereich | [Zum Shop](https://www.antratek.de/spectral-sensor-breakout-as7263-nir) | Vorhanden; Kalibrierung und Auswertung laufen |
+| **GARDENA smart SILENO max 800 m²** | 1 | Mobile Plattform für das Rasenpflegekonzept | [Zum Shop](https://www.gardena.com/de/produkte/rasenpflege/maehroboter/maehroboter-smart-sileno-max-800-m/970620803.html) | Vorhanden; Integration muss getestet werden |
+| **Weitere ESP32-S3-Boards** | 2 | Zusätzliche Steuerungs- und Sensorversuche | [Zum Shop](https://www.antratek.de/thing-plus-esp32-s3) | Vorhanden; weitere Tests geplant |
+| **BME280-Sensormodule** | 2 | Messung von Temperatur, Luftdruck und Luftfeuchtigkeit | [Zum Shop](https://www.roboter-bausatz.de/p/digital-bme280-temperatur-sensor-luftdruck-feuchtigkeit-i2c-5v-barometer-arduino) | Vorhanden; Einsatz je nach Teilprojekt |
+| **Raspberry Pi Zero W** | 2 | Kompakte Recheneinheiten für mögliche Erweiterungen | [Zum Shop](https://www.raspberrypi.com/products/raspberry-pi-zero-w/) | Vorhanden; Einsatz für Erweiterungen offen |
+| **VL53L0X-Abstandssensoren** | 2 | Entfernungsmessungen | [Zur Info](https://www.st.com/en/imaging-and-photonics-solutions/vl53l0x) | Vorhanden |
+| **Rasensprinkler** | 1 | Gezielte Bewässerung ausgewählter Rasenbereiche | *Noch offen* | Geplant; Produkt noch nicht bestätigt |
+| **ZED-F9P-15B-GPS-Modul** | Noch offen | Mögliche zukünftige Erweiterung zur Positionsbestimmung | [Zum Shop](https://www.digikey.de/de/products/detail/u-blox/ZED-F9P-15B/20838269) | Zukünftige Erweiterung; Anschaffung nicht bestätigt |
+| **Micro-USB-Kabel für Raspberry Pi** | 1 | Stromversorgung oder Verbindung, abhängig vom Einsatz | [Zum Shop](https://www.reichelt.de/de/de/shop/produkt/raspberry_pi_-_kabel_micro-usb_m_auf_usb_typ_a_f_otg_10cm_-316284) | Verfügbarkeit prüfen |
 
 
 ### 🧪 Entwicklungsstatus
