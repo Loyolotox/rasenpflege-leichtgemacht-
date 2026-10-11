@@ -10,6 +10,8 @@ Dadurch soll weniger manueller Aufwand entstehen. Der Roboter soll mithilfe vers
 
 ## 📋 Projekt-Plan & Aufgaben
 
+https://chatgpt.com/s/m_6acbbfd2107081918fb0ca05fdcd8d7b
+
 ### 💡 Was der Rasenmäher machen muss
 
 - Selbstständiges Mähen des Rasens
