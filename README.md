@@ -128,6 +128,7 @@ Die Gesamtkosten sollen anhand der tatsächlichen Anschaffungspreise berechnet w
 | **Gesamtkosten des Projekts** | **Summe der bestätigten Anschaffungskosten** | **Noch zu ermitteln** |
 
 Die Kostenübersicht wird ergänzt, sobald die tatsächlichen Kaufpreise bekannt sind. Bereits vorhandene Komponenten werden dabei nicht automatisch als kostenlose Teile gewertet: Auch ihre ursprünglichen Anschaffungskosten gehören zu den Projektkosten. Geplante, noch nicht gekaufte Erweiterungen werden separat aufgeführt.
+ 
 ---
 ## 🔌 Verkabelung & Anschlüsse (Pinout)
 
