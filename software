@@ -42,12 +42,7 @@ Langfristig soll die Messung auf einem fahrenden Rasenmähroboter eingesetzt wer
 
 **Hinweis:** Die Messung ist ein Forschungsprototyp. Eine zuverlässige Bestimmung der Grasfeuchtigkeit ist erst nach systematischen Tests und einer Kalibrierung möglich.
 
-# ============================================================
-# Rasenpflege leicht gemacht!
-# Experimentelle optische Messung mit dem AS7263
-# ESP32 + MicroPython
-# ============================================================
-
+``` 
 from machine import Pin, ADC, PWM, I2C
 import time
 
@@ -293,7 +288,9 @@ except KeyboardInterrupt:
     print("Messung wurde beendet.")
 
 finally:
+
     # Beleuchtung beim Beenden ausschalten
     led.duty_u16(LED_OFF)
     led.deinit()
-    print("LED ausgeschaltet.")
+    print("LED ausgeschaltet.") 
+``` 
