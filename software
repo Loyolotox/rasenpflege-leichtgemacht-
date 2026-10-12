@@ -1,46 +1,4 @@
-## Software: Optische Feuchtemessung mit dem AS7263
 
-### Ziel
-
-Das Programm untersucht, ob sich die Feuchtigkeit von Gras mithilfe optischer Messungen erkennen lässt. Dafür verwenden wir den **AS7263-NIR-Sensor**, der sechs Spektralkanäle im nahen Infrarot- und Rotbereich auswertet.
-
-Zusätzlich misst ein LDR die Helligkeit. Abhängig vom gemessenen Lichtwert wird eine externe Beleuchtung gesteuert. Dadurch sollen die Messbedingungen möglichst reproduzierbar werden.
-
-### Funktionsweise
-
-1. Der ESP32 liest den Helligkeitswert des LDR aus.
-2. Anhand des Wertes wird die Beleuchtung ausgeschaltet, reduziert oder auf volle Leistung gestellt.
-3. Der AS7263 erfasst die optischen Messwerte.
-4. Das Programm liest insbesondere die Kanäle bei 760 nm, 810 nm und 860 nm aus.
-5. Aus den Messwerten bei 810 nm und 860 nm wird ein Verhältnis berechnet:
-
-   **Feuchte-Index = Messwert bei 810 nm / Messwert bei 860 nm**
-
-Dieser Index ist zunächst nur ein experimenteller Kennwert. Er ist kein direkt gemessener Feuchteprozentsatz und muss durch Vergleichsmessungen mit unterschiedlich feuchtem Gras überprüft werden.
-
-### Bisherige Probleme
-
-- **Sehr niedrige Messwerte:** Bei reduzierter Beleuchtung wurden teilweise Werte zwischen 0 und 3 beobachtet. Solche kleinen Werte können stark durch Rauschen und Umgebungslicht beeinflusst werden.
-- **Messwert von 0 bei 860 nm:** Ist der Nenner null, kann kein gültiger Index berechnet werden. Das Programm muss diesen Fall erkennen.
-- **Unterschiedliche Beleuchtung:** Änderungen der Beleuchtung können die Messwerte verändern, ohne dass sich die Grasfeuchtigkeit geändert hat.
-- **Bewegung des Mähroboters:** Abstand, Neigung und Vibrationen können die Messung beeinflussen.
-- **Noch keine Kalibrierung:** Bisherige Messwerte allein beweisen noch keinen Zusammenhang zwischen dem Index und der tatsächlichen Grasfeuchtigkeit.
-
-### Nächste Schritte
-
-Für belastbare Ergebnisse sollen trockene und feuchte Grasflächen mehrfach unter möglichst gleichen Bedingungen gemessen werden. Abstand, Beleuchtung und Messposition sollen konstant bleiben. Die Ergebnisse müssen mit einer unabhängigen Referenzmessung verglichen werden.
-
-Langfristig soll die Messung auf einem fahrenden Rasenmähroboter eingesetzt werden, damit unterschiedliche Bereiche einer Rasenfläche untersucht und auf einer Karte dargestellt werden können.
-
-### Hardware und Bibliothek
-
-- ESP32 mit MicroPython
-- AS7263-NIR-Sensor über I²C
-- LDR zur Erfassung der Helligkeit
-- Externe, passend angesteuerte Beleuchtung
-- MicroPython-Treiber: [AS726X_LoPy auf GitHub](https://github.com/jajberni/AS726X_LoPy)
-
-**Hinweis:** Die Messung ist ein Forschungsprototyp. Eine zuverlässige Bestimmung der Grasfeuchtigkeit ist erst nach systematischen Tests und einer Kalibrierung möglich.
 
 
 ```  from machine import Pin, ADC, PWM, I2C
