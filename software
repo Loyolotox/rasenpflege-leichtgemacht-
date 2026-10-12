@@ -1,7 +1,5 @@
-
-
-
-```  from machine import Pin, ADC, PWM, I2C
+``` 
+ from machine import Pin, ADC, PWM, I2C
 import time
 
 # AS726X-Treiber:
