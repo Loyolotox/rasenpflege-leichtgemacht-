@@ -1,0 +1,299 @@
+## Software: Optische Feuchtemessung mit dem AS7263
+
+### Ziel
+
+Das Programm untersucht, ob sich die Feuchtigkeit von Gras mithilfe optischer Messungen erkennen lässt. Dafür verwenden wir den **AS7263-NIR-Sensor**, der sechs Spektralkanäle im nahen Infrarot- und Rotbereich auswertet.
+
+Zusätzlich misst ein LDR die Helligkeit. Abhängig vom gemessenen Lichtwert wird eine externe Beleuchtung gesteuert. Dadurch sollen die Messbedingungen möglichst reproduzierbar werden.
+
+### Funktionsweise
+
+1. Der ESP32 liest den Helligkeitswert des LDR aus.
+2. Anhand des Wertes wird die Beleuchtung ausgeschaltet, reduziert oder auf volle Leistung gestellt.
+3. Der AS7263 erfasst die optischen Messwerte.
+4. Das Programm liest insbesondere die Kanäle bei 760 nm, 810 nm und 860 nm aus.
+5. Aus den Messwerten bei 810 nm und 860 nm wird ein Verhältnis berechnet:
+
+   **Feuchte-Index = Messwert bei 810 nm / Messwert bei 860 nm**
+
+Dieser Index ist zunächst nur ein experimenteller Kennwert. Er ist kein direkt gemessener Feuchteprozentsatz und muss durch Vergleichsmessungen mit unterschiedlich feuchtem Gras überprüft werden.
+
+### Bisherige Probleme
+
+- **Sehr niedrige Messwerte:** Bei reduzierter Beleuchtung wurden teilweise Werte zwischen 0 und 3 beobachtet. Solche kleinen Werte können stark durch Rauschen und Umgebungslicht beeinflusst werden.
+- **Messwert von 0 bei 860 nm:** Ist der Nenner null, kann kein gültiger Index berechnet werden. Das Programm muss diesen Fall erkennen.
+- **Unterschiedliche Beleuchtung:** Änderungen der Beleuchtung können die Messwerte verändern, ohne dass sich die Grasfeuchtigkeit geändert hat.
+- **Bewegung des Mähroboters:** Abstand, Neigung und Vibrationen können die Messung beeinflussen.
+- **Noch keine Kalibrierung:** Bisherige Messwerte allein beweisen noch keinen Zusammenhang zwischen dem Index und der tatsächlichen Grasfeuchtigkeit.
+
+### Nächste Schritte
+
+Für belastbare Ergebnisse sollen trockene und feuchte Grasflächen mehrfach unter möglichst gleichen Bedingungen gemessen werden. Abstand, Beleuchtung und Messposition sollen konstant bleiben. Die Ergebnisse müssen mit einer unabhängigen Referenzmessung verglichen werden.
+
+Langfristig soll die Messung auf einem fahrenden Rasenmähroboter eingesetzt werden, damit unterschiedliche Bereiche einer Rasenfläche untersucht und auf einer Karte dargestellt werden können.
+
+### Hardware und Bibliothek
+
+- ESP32 mit MicroPython
+- AS7263-NIR-Sensor über I²C
+- LDR zur Erfassung der Helligkeit
+- Externe, passend angesteuerte Beleuchtung
+- MicroPython-Treiber: [AS726X_LoPy auf GitHub](https://github.com/jajberni/AS726X_LoPy)
+
+**Hinweis:** Die Messung ist ein Forschungsprototyp. Eine zuverlässige Bestimmung der Grasfeuchtigkeit ist erst nach systematischen Tests und einer Kalibrierung möglich.
+
+# ============================================================
+# Rasenpflege leicht gemacht!
+# Experimentelle optische Messung mit dem AS7263
+# ESP32 + MicroPython
+# ============================================================
+
+from machine import Pin, ADC, PWM, I2C
+import time
+
+# AS726X-Treiber:
+# AS726X.py und Device.py müssen auf dem ESP32 verfügbar sein.
+from AS726X import AS726X
+
+
+
+
+# I2C-Verbindung zum AS7263
+I2C_SDA_PIN = 21
+I2C_SCL_PIN = 22
+
+# Beispielpins: an die eigene Schaltung anpassen!
+LDR_PIN = 34
+LED_PIN = 25
+
+
+
+
+# LDR-Grenzwerte aus den bisherigen Versuchen
+LDR_DARK_THRESHOLD = 500
+LDR_BRIGHT_THRESHOLD = 2500
+
+# PWM-Frequenz für eine externe Beleuchtung
+LED_PWM_FREQUENCY = 1000
+
+# Beispielwerte für die PWM:
+# 0       = LED aus
+# 19660   = ungefähr 30 % Leistung
+# 65535   = 100 % PWM-Tastgrad
+#
+# Das ist NICHT automatisch gleichbedeutend mit
+# 30 % bzw. 100 % des tatsächlichen LED-Stroms.
+LED_OFF = 0
+LED_MEDIUM = 19660
+LED_FULL = 65535
+
+# Kurze Pause zwischen den Messzyklen
+MEASUREMENT_INTERVAL = 1.0
+
+
+
+
+# I2C-Bus starten
+i2c = I2C(
+    0,
+    sda=Pin(I2C_SDA_PIN),
+    scl=Pin(I2C_SCL_PIN),
+    freq=100000
+)
+
+# Angeschlossene I2C-Geräte anzeigen
+print("Gefundene I2C-Geräte:", i2c.scan())
+
+# AS7263 initialisieren
+sensor = AS726X(
+    i2c=i2c,
+    mode=3,
+    gain=3,
+    integration_time=50
+)
+
+# LDR als Analogeingang konfigurieren
+ldr = ADC(Pin(LDR_PIN))
+ldr.atten(ADC.ATTN_11DB)
+
+# Externe LED über PWM steuern
+# Nur verwenden, wenn der Pin mit einer geeigneten
+# LED-Treiberstufe verbunden ist.
+led = PWM(
+    Pin(LED_PIN),
+    freq=LED_PWM_FREQUENCY,
+    duty_u16=LED_OFF
+)
+
+
+
+def read_brightness():
+    """Liest den aktuellen ADC-Wert des LDR."""
+    return ldr.read()
+
+
+def control_led(brightness):
+    """
+    Steuert die externe Beleuchtung anhand des LDR-Wertes.
+
+    Unter 500: LED aus
+    500 bis 2500: mittlere PWM-Einstellung
+    Über 2500: volle PWM-Einstellung
+
+    Die Schwellenwerte müssen zur tatsächlichen
+    Schaltung und zur gewünschten Regelung passen.
+    """
+
+    if brightness < LDR_DARK_THRESHOLD:
+        led.duty_u16(LED_OFF)
+        status = "LED aus"
+
+    elif brightness <= LDR_BRIGHT_THRESHOLD:
+        led.duty_u16(LED_MEDIUM)
+        status = "LED mittlere Einstellung"
+
+    else:
+        led.duty_u16(LED_FULL)
+        status = "LED volle Einstellung"
+
+    return status
+
+
+
+def read_spectral_values():
+    """
+    Führt eine Messung aus und liest die kalibrierten
+    Werte aller sechs AS7263-Kanäle aus.
+
+    Rückgabe:
+        wavelengths: Liste der Wellenlängen
+        values:      Liste der Messwerte
+    """
+
+    # Neue Messung auslösen
+    sensor.take_measurements()
+
+    # Kurze Wartezeit für die Verarbeitung
+    time.sleep_ms(100)
+
+    # Wellenlängen und kalibrierte Messwerte lesen
+    wavelengths = sensor.get_wavelengths()
+    values = sensor.get_calibrated_values()
+
+    return wavelengths, values
+
+
+
+
+def get_selected_channels(wavelengths, values):
+    """
+    Sucht die Messwerte bei 760, 810 und 860 nm.
+    Die Zuordnung erfolgt über die Wellenlängenliste,
+    nicht über fest angenommene Listenpositionen.
+    """
+
+    channel_values = {}
+
+    for wavelength, value in zip(wavelengths, values):
+        # Wellenlängen als ganze Zahlen vergleichen
+        channel = int(wavelength)
+        channel_values[channel] = value
+
+    required_channels = [760, 810, 860]
+
+    for channel in required_channels:
+        if channel not in channel_values:
+            raise ValueError(
+                "Messkanal {} nm fehlt".format(channel)
+            )
+
+    value_760 = channel_values[760]
+    value_810 = channel_values[810]
+    value_860 = channel_values[860]
+
+    return value_760, value_810, value_860
+
+
+
+def calculate_moisture_index(value_810, value_860):
+    """
+    Berechnet das Verhältnis 810 nm / 860 nm.
+
+    WICHTIG:
+    Der Wert ist ein experimenteller Index und kein
+    direkt gemessener Feuchteprozentsatz.
+    """
+
+    # Division durch null verhindern
+    if value_860 == 0:
+        return None
+
+    index = value_810 / value_860
+    return index
+
+
+
+
+print("Starte optische Gras-Messung ...")
+
+try:
+    while True:
+
+        # Helligkeit erfassen
+        brightness = read_brightness()
+
+        # Beleuchtung passend einstellen
+        led_status = control_led(brightness)
+
+        # Warten, damit sich die Beleuchtung einstellen kann
+        time.sleep_ms(100)
+
+        try:
+            # Spektralmessung durchführen
+            wavelengths, values = read_spectral_values()
+
+            # Relevante Kanäle auslesen
+            value_760, value_810, value_860 = (
+                get_selected_channels(wavelengths, values)
+            )
+
+            # Index berechnen
+            moisture_index = calculate_moisture_index(
+                value_810,
+                value_860
+            )
+
+            # Ergebnisse ausgeben
+            print("--------------------------------")
+            print("LDR-Wert:", brightness)
+            print("Beleuchtung:", led_status)
+            print("760 nm:", value_760)
+            print("810 nm:", value_810)
+            print("860 nm:", value_860)
+
+            if moisture_index is None:
+                print(
+                    "Feuchte-Index: ungültig "
+                    "(Messwert bei 860 nm ist 0)"
+                )
+            else:
+                print(
+                    "Experimenteller Feuchte-Index:",
+                    round(moisture_index, 4)
+                )
+
+        except (OSError, ValueError, TypeError) as error:
+            # Sensor- oder Datenfehler anzeigen
+            print("Fehler bei der Spektralmessung:", error)
+
+        # Nächster Messzyklus
+        time.sleep(MEASUREMENT_INTERVAL)
+
+except KeyboardInterrupt:
+    print("Messung wurde beendet.")
+
+finally:
+    # Beleuchtung beim Beenden ausschalten
+    led.duty_u16(LED_OFF)
+    led.deinit()
+    print("LED ausgeschaltet.")
