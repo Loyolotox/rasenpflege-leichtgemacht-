@@ -42,8 +42,8 @@ Langfristig soll die Messung auf einem fahrenden Rasenmähroboter eingesetzt wer
 
 **Hinweis:** Die Messung ist ein Forschungsprototyp. Eine zuverlässige Bestimmung der Grasfeuchtigkeit ist erst nach systematischen Tests und einer Kalibrierung möglich.
 
-``` 
-from machine import Pin, ADC, PWM, I2C
+
+```  from machine import Pin, ADC, PWM, I2C
 import time
 
 # AS726X-Treiber:
@@ -293,4 +293,4 @@ finally:
     led.duty_u16(LED_OFF)
     led.deinit()
     print("LED ausgeschaltet.") 
-``` 
+
