@@ -32,7 +32,7 @@ Dadurch soll weniger manueller Aufwand entstehen. Der Roboter soll mithilfe vers
 - ESP32 soll regelmäßig, zunächst etwa jede Sekunde, Daten schicken.
 - Die Kamera des ESP32-S3-CAM soll Bilder des Rasens aufnehmen.
 - Der Raspberry Pi soll eine Live-Tabelle und Diagramme in einer Web-App anzeigen.
-- Wir prüfen, ob wir auf den **Raspberry Pi Zero W** umsteigen können.
+- Wir prüfen, ob wir auf den **Raspberry Pi Zero W** umsteigen können.https://docs.freenove.com/projects/fnk0084/en/latest/fnk0084/codes/Python/30_Camera_Web_Server.html?utm_source=chatgpt.com
 - Die Verbindung zwischen ESP32 und Raspberry Pi soll stabil laufen.
 - Die aufgenommenen Bilder und Messwerte sollen später gemeinsam ausgewertet werden.
 - Später vielleicht eine App daraus machen.
@@ -45,8 +45,6 @@ Dadurch soll weniger manueller Aufwand entstehen. Der Roboter soll mithilfe vers
 - Mit `esptool` können wir den ESP32-S3 über USB erkennen und Firmware übertragen.
 - Für die Entwicklung können wir **VS Code Remote SSH** verwenden.
 - Langfristig soll das System modular aufgebaut werden, damit weitere Sensoren und Funktionen ergänzt werden können.
-
-- https://docs.freenove.com/projects/fnk0084/en/latest/fnk0084/codes/Python/30_Camera_Web_Server.html?utm_source=chatgpt.com
 
 ### 🤖 Kamera & zukünftige KI-Auswertung
 
@@ -114,6 +112,7 @@ Langfristig soll die Messung auf einem fahrenden Rasenmähroboter eingesetzt wer
 - LDR zur Erfassung der Helligkeit
 - Externe, passend angesteuerte Beleuchtung
 - MicroPython-Treiber: [AS726X_LoPy auf GitHub](https://github.com/jajberni/AS726X_LoPy)
+- [Anleitung für den eps 32 cam](https://docs.freenove.com/projects/fnk0084/en/latest/fnk0084/codes/Python/30_Camera_Web_Server.html?utm_source=chatgpt.com)
 
 **Hinweis:** Die Messung ist ein Forschungsprototyp. Eine zuverlässige Bestimmung der Grasfeuchtigkeit ist erst nach systematischen Tests und einer Kalibrierung möglich.
 
