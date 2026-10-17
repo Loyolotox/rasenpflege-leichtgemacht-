@@ -46,6 +46,8 @@ Dadurch soll weniger manueller Aufwand entstehen. Der Roboter soll mithilfe vers
 - Für die Entwicklung können wir **VS Code Remote SSH** verwenden.
 - Langfristig soll das System modular aufgebaut werden, damit weitere Sensoren und Funktionen ergänzt werden können.
 
+- https://docs.freenove.com/projects/fnk0084/en/latest/fnk0084/codes/Python/30_Camera_Web_Server.html?utm_source=chatgpt.com
+
 ### 🤖 Kamera & zukünftige KI-Auswertung
 
 Die Kamera soll zusätzliche Informationen über den Zustand des Rasens liefern. In einem späteren Schritt möchten wir untersuchen, ob sich mithilfe einer Bildauswertung trockene, gesunde oder auffällige Rasenbereiche erkennen lassen.
