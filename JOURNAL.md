@@ -7,7 +7,7 @@ created_at: "2026-10-01"
 
 # October 01: Starting the lawn care project with basic sensors
 
-So, the whole idea started because maintaining a proper lawn is actually painful without data. Today I decided to build a monitoring system. Hooked up some super cheap analog soil moisture sensors and a basic temperature sensor to an Arduino. Plugged everything into the breadboard and started reading raw ADC values. Total disaster — the cheap metal probes started oxidizing almost immediately in the damp dirt, lol. But hey, it’s a start for the lawn care tracker!
+So, the whole idea started because maintaining a proper lawn is actually painful without data. Today I decided to build a monitoring system. Hooked up some super cheap analog soil moisture sensors and a basic temperature sensor to an Arduino. Plugged everything into the breadboard and started reading raw ADC values. Total disaster — the cheap metal probes started oxidizing almost immediately in the damp dirt, LOL. But hey, it’s a start for the lawn care tracker!
 
 **Total time spent: 6 hours**
 
