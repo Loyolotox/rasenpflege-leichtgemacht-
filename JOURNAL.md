@@ -33,7 +33,7 @@ Big realization today: an Arduino combined with a running Raspberry Pi server ea
 
 # October 15: Upgrading to LoRaWAN with the LA66 module
 
-Wi-Fi coverage in the middle of the garden is absolute garbage, so local Wi-Fi was out of the question. Decided to jump straight to LoRaWAN using an LA66 module. Wired up ESP32 GPIO 17 (TX) to LA66 RX (Pin 11) and GPIO 16 (RX) to LA66 TX (Pin 10), plus 3V3 and GND power lines. Spent ages digging through obscure datasheets trying to figure out the right AT commands. Accidentally swapped RX and TX on the first try, meaning nothing transmitted at all for two hours until I noticed the mistake. Lol, rookie error.
+Wi-Fi coverage in the middle of the garden is absolute garbage, so local Wi-Fi was out of the question. Decided to jump straight to LoRaWAN using an LA66 module. Wired up ESP32 GPIO 17 (TX) to LA66 RX (Pin 11) and GPIO 16 (RX) to LA66 TX (Pin 10), plus 3V3 and GND power lines. Spent ages digging through obscure datasheets trying to figure out the right AT commands. Accidentally swapped RX and TX on the first try, meaning nothing transmitted at all for two hours until I noticed the mistake.Well, the problem in the end was simply that I’d wired it up wrong and hadn’t spotted it straight away; at first I thought it must be down to the COD, but I’d actually used pin 12 instead of pin 11 .
 
 **Total time spent: 7 hours**
 
