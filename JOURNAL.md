@@ -21,8 +21,7 @@ Realized that just reading sensor values on an Arduino isn't enough; we need a p
 
 Soil temperature alone doesn't tell the whole story about grass health, so today we integrated an AS7263 (NIR) infrared thermal sensor to measure the surface temperature of the lawn without physical contact. Naturally, I ran straight into I2C address conflicts with the existing hardware setup. Spent hours staring at the serial monitor while the code froze completely. Added proper pull-up resistors and tweaked the code until the IR sensor finally behaved.
 
-![Circuit Setup](<img width="3000" height="1992" alt="circuit_image(1)" src="https://github.com/user-attachments/assets/5a6f9e64-84e4-491e-9b1e-02b665f7308c" />
-)
+<img width="3000" height="1992" alt="circuit_image(1)" src="https://github.com/user-attachments/assets/8911daad-511b-4b16-a298-9c69b31e9574" />
 
 **Total time spent: 7 hours**
 
