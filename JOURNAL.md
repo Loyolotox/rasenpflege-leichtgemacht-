@@ -27,7 +27,7 @@ Soil temperature alone doesn't tell the whole story about grass health, so today
 
 # October 12: Moving away from Arduino & Pi to the ESP32
 
-Big realization today: an Arduino combined with a running Raspberry Pi server eats way too much power to be a practical, standalone garden node out in the yard. Switched the main brain over to an ESP32 because of its deep sleep features. Had to rewrite a massive chunk of the sensor acquisition code into MicroPython. Spent hours debugging deep sleep wake-up timers because the board refused to wake up properly when triggered by the sensor interrupts. Well, the problem in the end was simply that I’d wired it up wrong and hadn’t spotted it straight away; at first I thought it must be down to the COD, but I’d actually used pin 12 instead of pin 11 , lol.
+Big realization today: an Arduino combined with a running Raspberry Pi server eats way too much power to be a practical, standalone garden node out in the yard. Switched the main brain over to an ESP32 because of its deep sleep features. Had to rewrite a massive chunk of the sensor acquisition code into MicroPython. Spent hours debugging deep sleep wake-up timers because the board refused to wake up properly when triggered by the sensor interrupts. Classic embedded dev pain , lol.
 
 **Total time spent: 9 hours**
 
