@@ -15,7 +15,10 @@ So, the whole idea started because maintaining a proper lawn is actually painful
 
 # October 04: Setting up the Raspberry Pi local server
 
-Realized that just reading sensor values on an Arduino isn't enough; we need a proper backend to store historical data about the lawn conditions. Set up an old Raspberry Pi with a Python Flask server and a local SQLite database. Spent half the day fighting with Linux network configurations, static IPs, and router settings so the microcontroller could actually talk to the Pi over local Wi-Fi without dropping packets every five minutes. 
+Realized that just reading sensor values on an Arduino isn't enough; we need a proper backend to store historical data about the lawn conditions. Set up an old Raspberry Pi with a Python Flask server and a local SQLite database.
+<img width="4080" height="3072" alt="IMG_20260830_161552751_MFNR" src="https://github.com/user-attachments/assets/8bdb8ffa-aa30-42d5-9549-0a453bcefd2f" />
+
+Spent half the day fighting with Linux network configurations, static IPs, and router settings so the microcontroller could actually talk to the Pi over local Wi-Fi without dropping packets every five minutes. 
 
 **Total time spent: 8 hours**
 
