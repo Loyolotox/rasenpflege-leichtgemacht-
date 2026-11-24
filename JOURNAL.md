@@ -50,7 +50,7 @@ Leaving exposed electronics out in the grass is a great way to destroy a project
 
 **Total time spent: 6 hours**
 
-# October 21: Pushing telemetry data to loramint.de dashboard
+# November 5: Pushing telemetry data to loramint.de dashboard
 
 Final stretch for the lawn care system! Connected the node to the `loramint.de` platform to visualize all the microclimate telemetry live. Wrote custom payload formatting scripts to translate raw LoRaWAN byte arrays into actual human-readable temperature, humidity, and soil metrics. Debugged some packet loss issues out in the yard. Seeing the actual live grass data plotting smoothly on the web dashboard made all the debugging hours totally worth it!
 
